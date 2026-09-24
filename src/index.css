@@ -1,0 +1,413 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Ege Camp Outdoor — tasarım sistemi
+   Kömür siyahı + logo turuncusu (ember) + kemik beyazı yüzeyler.
+   Başlıklar Barlow Condensed (dar, outdoor etiket hissi), metin Inter.
+------------------------------------------------------------------ */
+
+@theme {
+  /* Yüzeyler */
+  --color-bone: #f6f4ef;
+  --color-mist: #efece5;
+  --color-stone: #e2ddd2;
+  --color-line: #e7e3da;
+
+  /* Kömür — logo yazısının rengi */
+  --color-char-950: #0e110f;
+  --color-char-900: #171b18;
+  --color-char-800: #20251f;
+  --color-char-700: #2c322c;
+  --color-char-600: #3d443d;
+  --color-char-500: #596058;
+  --color-char-400: #7c8279;
+  --color-char-300: #a7aba3;
+  --color-char-200: #cfd1cb;
+
+  /* Ember — logo çadırının turuncusu. Açık zeminde yazı için 700 kullanılır */
+  --color-ember-50: #fff6e8;
+  --color-ember-100: #ffe9c7;
+  --color-ember-200: #ffd28a;
+  --color-ember-300: #ffba4d;
+  --color-ember-400: #ffa71f;
+  --color-ember: #f79400;
+  --color-ember-600: #db7c00;
+  --color-ember-700: #a65a00;
+  --color-ember-800: #7a4300;
+
+  /* Yosun — stok, onay, başarı */
+  --color-moss-50: #eef5ef;
+  --color-moss-100: #d6e8d8;
+  --color-moss-500: #3f7a4a;
+  --color-moss-600: #2f6239;
+  --color-moss-700: #234a2b;
+
+  /* Uyarı ve hata */
+  --color-flame: #c2371f;
+  --color-flame-50: #fdeeea;
+  --color-sky-600: #2a67c4;
+  --color-sky-50: #ecf3fd;
+
+  /* Tipografi */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Hareket */
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade: fade 0.4s ease both;
+  --animate-drawer: drawer 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-drawer-left: drawer-left 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pop: pop 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes drawer {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes drawer-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-char-900);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    color: var(--color-char-900);
+  }
+
+  ::selection {
+    background: var(--color-ember-200);
+    color: var(--color-char-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-stone) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-stone);
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  /* Birincil düğme — turuncu zemin, kömür yazı (4.5:1 üstü kontrast) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding-inline: 1.25rem;
+    border-radius: 0.625rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s,
+      transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--color-ember);
+    color: var(--color-char-950);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-ember-400);
+  }
+  .btn-dark {
+    background: var(--color-char-900);
+    color: #fff;
+  }
+  .btn-dark:hover:not(:disabled) {
+    background: var(--color-char-700);
+  }
+  .btn-outline {
+    border: 1px solid var(--color-stone);
+    background: #fff;
+    color: var(--color-char-800);
+  }
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--color-char-400);
+  }
+  .btn-ghost {
+    color: var(--color-char-700);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-mist);
+  }
+  .btn-sm {
+    height: 2.25rem;
+    padding-inline: 0.875rem;
+    font-size: 0.8125rem;
+    border-radius: 0.5rem;
+  }
+  .btn-lg {
+    height: 3.25rem;
+    padding-inline: 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .field {
+    width: 100%;
+    height: 2.75rem;
+    border: 1px solid var(--color-stone);
+    background: #fff;
+    border-radius: 0.625rem;
+    padding-inline: 0.875rem;
+    font-size: 0.9rem;
+    color: var(--color-char-900);
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+  textarea.field {
+    height: auto;
+    padding-block: 0.625rem;
+  }
+  .field::placeholder {
+    color: var(--color-char-300);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-ember-600);
+    box-shadow: 0 0 0 3px rgb(247 148 0 / 0.18);
+  }
+  .field-sm {
+    height: 2.25rem;
+    font-size: 0.8125rem;
+    border-radius: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+  .label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-char-600);
+    margin-bottom: 0.375rem;
+  }
+}
+
+@layer utilities {
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ember-700);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+  }
+
+  .card-lift {
+    box-shadow:
+      0 1px 2px rgb(14 17 15 / 0.04),
+      0 10px 28px -14px rgb(14 17 15 / 0.18);
+  }
+  .card-lift-lg {
+    box-shadow:
+      0 1px 2px rgb(14 17 15 / 0.05),
+      0 28px 56px -24px rgb(14 17 15 / 0.3);
+  }
+
+  /* Topografik kontur dokusu — koyu bölümlerde */
+  .topo {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='1'%3E%3Cpath d='M-20 60c40-30 90-30 130 0s90 30 130 0 90-30 130 0'/%3E%3Cpath d='M-20 90c40-26 90-26 130 4s90 26 130-4 90-26 130 0'/%3E%3Cpath d='M-20 150c50-40 100-10 140 10s80 20 120-10 80-40 120-10'/%3E%3Cpath d='M-20 180c50-34 100-6 140 14s80 16 120-12 80-34 120-8'/%3E%3Cpath d='M-20 240c30-20 70-40 120-10s100 30 140 0 60-20 100 0'/%3E%3Cpath d='M-20 270c30-16 70-34 120-6s100 26 140-2 60-16 100 2'/%3E%3Cellipse cx='250' cy='120' rx='30' ry='16'/%3E%3Cellipse cx='250' cy='120' rx='52' ry='30'/%3E%3Cellipse cx='70' cy='210' rx='22' ry='12'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .topo-dark {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%23171b18' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M-20 60c40-30 90-30 130 0s90 30 130 0 90-30 130 0'/%3E%3Cpath d='M-20 90c40-26 90-26 130 4s90 26 130-4 90-26 130 0'/%3E%3Cpath d='M-20 150c50-40 100-10 140 10s80 20 120-10 80-40 120-10'/%3E%3Cpath d='M-20 180c50-34 100-6 140 14s80 16 120-12 80-34 120-8'/%3E%3Cpath d='M-20 240c30-20 70-40 120-10s100 30 140 0 60-20 100 0'/%3E%3Cpath d='M-20 270c30-16 70-34 120-6s100 26 140-2 60-16 100 2'/%3E%3Cellipse cx='250' cy='120' rx='30' ry='16'/%3E%3Cellipse cx='250' cy='120' rx='52' ry='30'/%3E%3Cellipse cx='70' cy='210' rx='22' ry='12'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-mist) 25%, var(--color-stone) 50%, var(--color-mist) 75%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+  }
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .pb-safe {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* ------------------------------------------------------------------
+   Baskı — kargo etiketleri
+------------------------------------------------------------------ */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

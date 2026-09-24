@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.DS_Store
+
+# Ortam değişkenleri
+.env
+.env.*
+!.env.example
+
+# Vercel bağlantı bilgileri (proje kimliği + OIDC belirteci)
+.vercel
+
+# Katalog betiğinin ham Shopify yanıtları (yeniden üretilebilir)
+scripts/.cache

@@ -8,6 +8,9 @@ Mevcut siteleri **Shopify** (Refresh teması) üzerinde; demo onun yerine geçec
 kendi sistemimizi gösterir. Kafe demolarından (Kuruluş Kahvesi, T74) farkı:
 QR menü/kasa yok, tamamen e-ticaret odaklı.
 
+**Canlı:** https://egecamp-demo.vercel.app (Vercel ekibi `t74`, proje `egecamp-demo`)
+**Depo:** `aetetdev/egecamp-demo` (herkese açık)
+
 ## Değişmez kurallar
 
 - **Katalog gerçek:** `src/data/catalog.json` + `details.json`, egecamp.com'un
